@@ -19,21 +19,25 @@ def cost(features, labels, weights, regularization=0):
 
 def predict(features, weights):
     """
-    Given the input data features and the weights computes the predictions from the linear regression model.
+    Given the input data features and the weights computes the predictions from the logistic regression model.
 
     Param: features - Numpy matrix of input data used to make prediction.
                       Each row is a training example and each feature is a column.
-           weights - Numpy column array of the learned weights of the model.
+           weights - Numpy array of the learned weights of the model.
+    Returns Numpy array of with a prediction for each example.
     """
     
     # Prepend a column of ones for bias feature
-    numEx = features.shape()[0]
+    numEx = features.shape[0]
     biasFeature = np.ones((numEx,1))
-    features = np.concatenate((biasFeature, features))
+    features = np.concatenate((biasFeature, features), axis=1)
 
-    prediction = activationFunc.sigmoid(np.dot(features, weights))
+    print(weights.T)
+
+    prediction = activationFunc.sigmoid(np.dot(features, weights.T))
 
     return prediction
+
 
 def gradient(features , labels, weights):
     """

@@ -22,15 +22,18 @@ def predict(features, weights):
 
     Param: features - Numpy matrix of input data used to make prediction.
                       Each row is a training example and each feature is a column.
-           weights - Numpy column array of the learned weights of the model.
+           weights - Numpy array of the learned weights of the model.
+    Returns Numpy array of with a prediction for each example.
     """
     
     # Prepend a column of ones for bias feature
-    numEx = features.shape()[0]
+    numEx = features.shape[0]
     biasFeature = np.ones((numEx,1))
-    features = np.concatenate((biasFeature, features))
+    features = np.concatenate((biasFeature, features), axis=1)
 
-    prediction = np.dot(features, weights)
+    print(weights.T)
+
+    prediction = np.dot(features, weights.T)
 
     return prediction
 
@@ -47,3 +50,8 @@ def gradient(features , labels, weights):
     pass
 
 
+if __name__ == "__main__":
+    features = np.array([[2, 5, 4], [3, 6, 8], [9, 3, 2]])
+    weights = np.array([4, 1, 2, 3])
+
+    prediction = predict(features, weights)

@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 import machinelearnlib.activationFunc as af
 
 
-class TestTesting(unittest.TestCase):
+class TestActivationFunc(unittest.TestCase):
 
     def test_sigmoid(self):
         result  = af.sigmoid(np.array([-1, 0, 1]))
