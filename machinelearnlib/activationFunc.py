@@ -9,6 +9,3 @@ def sigmoid(arr):
     """
 
     return np.exp(arr)/(np.exp(arr) + 1)
-
-def multiply(a, b):
-    return a*b
