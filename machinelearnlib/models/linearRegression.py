@@ -1,19 +1,30 @@
 import numpy as np
 
-def cost(features, labels, weights, regularization=0):
+def cost(features, labels, weights, reg=0):
     """
     Computes the squared error between the labels and predicted output with regularization for each weight.
 
     Param: features - Numpy matrix of input data used to make prediction.
                       Each row is a training example and each feature is a column.
-           labels - Numpy column vector of the correct output for each training example.
-           weights - Numpy column vector of the learned weights of the model.
-           regularization - Integer representing the regularization.
+           labels - Numpy array of the correct output for each training example.
+           weights - Numpy array of the learned weights of the model.
+           reg - Integer representing the regularization.
 
     Return: Cost of the linear regression model.
     """
 
-    pass
+    # Number of training set examples
+    numEx = features.shape[0]
+
+    # Compute the squared Error
+    pred_labels= predict(features, weights)
+    squaredError = (pred_labels - labels)**2
+    cost = (1/(2 * numEx)) * squaredError.sum()
+
+    # Add the Regularization for all weights except for the bias
+    cost += (reg/(2*numEx)) * (weights[1:]**2).sum()
+
+    return cost
 
 
 def predict(features, weights):
@@ -30,8 +41,6 @@ def predict(features, weights):
     numEx = features.shape[0]
     biasFeature = np.ones((numEx,1))
     features = np.concatenate((biasFeature, features), axis=1)
-
-    print(weights.T)
 
     prediction = np.dot(features, weights.T)
 
@@ -53,5 +62,6 @@ def gradient(features , labels, weights):
 if __name__ == "__main__":
     features = np.array([[2, 5, 4], [3, 6, 8], [9, 3, 2]])
     weights = np.array([4, 1, 2, 3])
+    labels = np.array([30, 40, 15])
 
-    prediction = predict(features, weights)
+    prediction = cost(features, labels, weights)

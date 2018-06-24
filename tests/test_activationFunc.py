@@ -4,9 +4,11 @@ import os
 import numpy as np
 
 # Insert the path to the machinelearnlib folder so python will search those modules on import statements
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+topLevelFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+machinelearnlibFolder = os.path.join(topLevelFolder, 'machinelearnlib')
+sys.path.insert(0, machinelearnlibFolder)
 
-import machinelearnlib.activationFunc as af
+import activationFunc as af
 
 
 class TestActivationFunc(unittest.TestCase):

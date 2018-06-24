@@ -4,9 +4,11 @@ import sys
 import numpy as np
 
 # Insert the path to the machinelearnlib folder so python will search those modules on import statements
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+topLevelFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+machinelearnlibFolder = os.path.join(topLevelFolder, 'machinelearnlib')
+sys.path.insert(0, machinelearnlibFolder)
 
-import machinelearnlib.models.logisticRegression as logReg
+import models.logisticRegression as logReg
 
 
 class TestLogisticRegression(unittest.TestCase):
@@ -26,3 +28,14 @@ class TestLogisticRegression(unittest.TestCase):
         prediction = logReg.predict(features, weights)
 
         np.testing.assert_allclose(prediction, np.array([0.5646363, 0.5274723, 0.4600851, 0.49750002]), atol=0.0001)
+
+
+    def test_cost(self):
+
+        features = np.array([[2, 5, 4], [3, 6, 8], [9, 3, 2]])
+        weights = np.array([0.04, 0.01, 0.02, 0.03])
+        labels = np.array([1, 0, 1])
+
+        logRegCost  = logReg.cost(features, labels, weights)
+
+        np.testing.assert_array_almost_equal(logRegCost, np.array([0.689979553]), decimal=5) 
