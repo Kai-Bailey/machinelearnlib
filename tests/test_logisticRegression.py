@@ -38,4 +38,16 @@ class TestLogisticRegression(unittest.TestCase):
 
         logRegCost  = logReg.cost(features, labels, weights)
 
-        np.testing.assert_array_almost_equal(logRegCost, np.array([0.689979553]), decimal=5) 
+        np.testing.assert_array_almost_equal(logRegCost, np.array([0.689979553]), decimal=5)
+
+
+    def test_gradient(self):
+
+        features = np.array([[2, 5, 4], [3, 6, 8], [9, 3, 2]])
+        weights = np.array([0.04, 0.01, 0.02, 0.03])
+        labels = np.array([1, 0, 1])
+
+        grad = logReg.gradient(features, labels, weights, 0.1)
+
+        np.testing.assert_allclose(grad, np.array([-0.08746787, -0.99423268, 0.05716754, 0.75084241]), atol=0.0001)
+

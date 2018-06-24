@@ -47,21 +47,31 @@ def predict(features, weights):
     return prediction
 
 
-def gradient(features , labels, weights):
+def gradient(features , labels, weights, reg=0):
     """
     Computes the gradient of the cost function For linear regression. 
 
     Param: features - Numpy matrix of input data used to make prediction.
                       Each row is a training example and each feature is a column.
-    labels - Numpy column vector of the correct output for each training example.
-    weights - Numpy column vector of the learned weights of the model.
+    labels - Numpy array of the correct output for each training example.
+    weights - Numpy array of the learned weights of the model.
+
+    Return: A numpy array containing the partial derivative of the cost function for each weight.
     """
-    pass
+    
+    numEx = features.shape[0]
+    prediction = predict(features, weights)
 
+    # Prepend a column of ones for bias feature
+    numEx = features.shape[0]
+    biasFeature = np.ones((numEx,1))
+    features = np.concatenate((biasFeature, features), axis=1)
 
-if __name__ == "__main__":
-    features = np.array([[2, 5, 4], [3, 6, 8], [9, 3, 2]])
-    weights = np.array([4, 1, 2, 3])
-    labels = np.array([30, 40, 15])
+    # Compute the gradient
+    difference = (prediction - labels)
+    grad = (1/numEx)*np.dot(features.T,difference.T)
+    
+    # Add the gradient of the regualrization term except for bias
+    grad[1:] = grad[1:] + (reg/numEx)*weights[1:]
 
-    prediction = cost(features, labels, weights)
+    return grad
