@@ -5,3 +5,10 @@
 
 A Python Package of Common Machine Learning Algorithms
 
+
+
+
+## Credit
+Example Data From:
+https://www.kaggle.com/andonians/random-linear-regression
+

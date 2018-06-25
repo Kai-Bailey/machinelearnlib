@@ -75,3 +75,9 @@ def gradient(features , labels, weights, reg=0):
     grad[1:] = grad[1:] + (reg/numEx)*weights[1:]
 
     return grad
+
+
+def load(mlModel):
+    mlModel["cost"] = cost
+    mlModel["gradient"] = gradient
+    mlModel["predict"] = predict

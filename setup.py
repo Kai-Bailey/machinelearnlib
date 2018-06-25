@@ -11,4 +11,4 @@ setup(name='machinelearnlib',
       keywords='machine learning data science',
       packages=find_packages(exclude=['contrib', 'docs', 'tests']),
       install_requires=['numpy', 'matplotlib'],
-      entry_points={'console_scripts':['ml=machinelearnlib.testing:testing']})
+      entry_points={'console_scripts':['ml=machinelearnlib.machinelearnlib:main']})

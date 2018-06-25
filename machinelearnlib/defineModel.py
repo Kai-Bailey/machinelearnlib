@@ -11,8 +11,8 @@ mlModel = {
     "labels":"labels.py",
 
     # Format of the training data
-    # Valid options are numpyArr or csv
-    "format":"numpyArr",
+    # Valid options are csv
+    "format":"csv",
 
     # Hyperparameters
     "learningRate":0.1,
@@ -29,3 +29,4 @@ mlModel = {
 # TODO Stochastic vs Gradient 
 # TODO Randomly Shuffle Data
 # TODO Split training set into test, cv and train (% split?)
+# TODO Add more data formats
