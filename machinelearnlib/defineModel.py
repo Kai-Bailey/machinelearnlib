@@ -7,8 +7,8 @@ mlModel = {
     # The files containing the features and labels should be placed in the data folder and the 
     # names of the files should be specified below.Features are are arranged so each row is a
     #  training example and each feature is a column.
-    "features":"trainFeatures.py",
-    "labels":"labels.py",
+    "trainDataFileName":"trainFeatures.py",
+    "testDataFileName":"labels.py",
 
     # Format of the training data
     # Valid options are csv

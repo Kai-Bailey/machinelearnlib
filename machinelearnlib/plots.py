@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 def plotTrainData(mlModel):
     """
@@ -23,5 +23,25 @@ def plotTrainData(mlModel):
             plt.ylabel('labels')
             plt.show()    
         
+def plotPrediction(mlModel):
+    
+    features = mlModel['features']
+    labels = mlModel['labels']
+    numFeatures = features.shape[1]
+
+    if mlModel["model"] == "linearRegression":
+        for i in range(numFeatures):
+            # Plot training data
+            plt.scatter(features[:, i], labels)
+
+            # Plot prediction
+            featuresUni = np.array(np.arange(100)).reshape(100, 1)
+            import models.linearRegression as linearRegression
+            predictions = linearRegression.predict(featuresUni, mlModel['weights'])
+            plt.plot(featuresUni, predictions, 'r')
 
 
+            plt.title('Training Data')
+            plt.xlabel('feature ' + str(i))
+            plt.ylabel('labels')
+            plt.show()   

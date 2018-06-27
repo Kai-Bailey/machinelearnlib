@@ -1,7 +1,7 @@
-from models import logisticRegression as logReg
-import models.linearRegression 
+from models import logisticRegression as logisticRegression
+import models.linearRegression as linearRegression
 import numpy as np
-
+import plots
 
 def gradientDescent(mlModel):
     model = mlModel["model"]
@@ -11,10 +11,11 @@ def gradientDescent(mlModel):
     reg = mlModel["regularization"]
     learnRate = mlModel["learningRate"]
 
-    cost = [model.cost(features, labels, weights, reg)]
-    for i in range(100):
-        grad = model.gradient(features, labels, weights, reg)
+    cost = [linearRegression.cost(features, labels, weights, reg)]
+    for i in range(10):
+        grad = linearRegression.gradient(features, labels, weights, reg)
         weights -= learnRate * grad
-        cost.append(model.cost(features, labels, weights, reg))
+        cost.append(linearRegression.cost(features, labels, weights, reg))
 
-    
+        plots.plotPrediction(mlModel)
+
