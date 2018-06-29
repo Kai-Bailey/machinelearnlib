@@ -45,3 +45,15 @@ def plotPrediction(mlModel):
             plt.xlabel('feature ' + str(i))
             plt.ylabel('labels')
             plt.show()   
+
+
+def plotCost(mlModel):
+    """
+    Plots the cost for each iteration. Note that a training algorithm must be run before this plot.
+    """
+
+    plt.plot(mlModel['cost'])
+    plt.title('Cost vs Iterations')
+    plt.xlabel('Iterations')
+    plt.ylabel('Cost')
+    plt.show()

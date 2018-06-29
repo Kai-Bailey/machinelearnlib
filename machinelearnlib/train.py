@@ -12,10 +12,12 @@ def gradientDescent(mlModel):
     learnRate = mlModel["learningRate"]
 
     cost = [linearRegression.cost(features, labels, weights, reg)]
-    for i in range(10):
+    for _ in range(mlModel['iterations']):
         grad = linearRegression.gradient(features, labels, weights, reg)
         weights -= learnRate * grad
         cost.append(linearRegression.cost(features, labels, weights, reg))
 
         plots.plotPrediction(mlModel)
 
+    # Save the cost for each iteration for ploting
+    mlModel['cost'] = cost

@@ -3,6 +3,7 @@ import loadData
 import train
 import plots
 import initializeWeights
+import featureScaling
 
 title = """
                   __   _          __                  ___ __ 
@@ -12,14 +13,19 @@ title = """
 
 """
 
-
+# TODO Ensure everything is type float
+# TODO Reshape feature
 
 def start(mlModel):
     print(title)
     loadData.loadData(mlModel)
     plots.plotTrainData(mlModel)
     initializeWeights.initializeWeights(mlModel)
+
+    #featureScaling.meanNormalization(mlModel)
+    #featureScaling.stdNormalization(mlModel)
     train.gradientDescent(mlModel)
+    plots.plotCost(mlModel)
  
 
 
@@ -44,6 +50,9 @@ def main():
     # Hyperparameters
     "learningRate":0.0001,
     "regularization":0.1,
+    
+    # Number of iterations to run the learning algorithm for
+    "iterations":10,
 
     # If the model used is a neural net you can specify the number of nodes in each layer using a list.
     # For example a neural network with an input layer of size 10, hidden layer 12 and output layer of 8
@@ -53,6 +62,14 @@ def main():
     }
     
     start(mlModel)
+
+# TODO Feature Scaling options
+# TODO Stochastic vs Gradient 
+# TODO Randomly Shuffle Data
+# TODO Split training set into test, cv and train (% split?)
+# TODO Add more data formats
+
+
 
 if __name__ == "__main__":
     main()

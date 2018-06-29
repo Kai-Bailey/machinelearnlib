@@ -9,13 +9,11 @@ def loadData(mlModel):
     trainData = genfromtxt(trainFileName, delimiter=',')
     testData = genfromtxt(testFileName, delimiter=',')
 
+
     mlModel['features'] = trainData[:, :-1]
     mlModel['labels'] = trainData[:, -1]
 
     mlModel['testFeatures'] = testData[:, :-1]
     mlModel['testLabels'] = testData[:, -1]
-
-
-
 
 
