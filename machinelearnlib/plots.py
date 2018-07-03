@@ -1,28 +1,59 @@
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import numpy as np
 
-def plotTrainData(mlModel):
+def plotTrainDataLinearRegression(mlModel):
     """
-    This function is only recomended for data sets with a small number of features. Data sets with multiple
-    features are difficult to visualize on a 2d plot. If a regression model is used this function will create
-    a plot for each feature against the label. If a classification model is used the each feature will be plotted
-    against each other with a different color marker for each class.
-    """
-
-    # TODO classification plot
+    This function is only recommended for data sets with a small number of features. Data sets with multiple
+    features are difficult to visualize on a 2d plot. This will create a plot of each feature aganst the labels.
+    """ 
 
     features = mlModel['features']
     labels = mlModel['labels']
     numFeatures = features.shape[1]
 
-    if mlModel["model"] == "linearRegression":
-        for i in range(numFeatures):
-            plt.scatter(features[:, i], labels)
-            plt.title('Training Data')
-            plt.xlabel('feature ' + str(i))
-            plt.ylabel('labels')
-            plt.show()    
-        
+    for i in range(numFeatures):
+        plt.scatter(features[:, i], labels)
+        plt.title('Training Data')
+        plt.xlabel('feature ' + str(i))
+        plt.ylabel('labels')
+        plt.show()
+
+            
+def plotTrainDataLogisticRegression(mlModel, feature1, feature2):
+    """
+    This function is only recommended for data sets with a small number of features. Data sets with multiple
+    features are difficult to visualize on a 2d plot. This plot the two features against each other with different
+    markers for each label. Feature1 and feature2 are the column numbers of the features to plot. 
+    """
+
+    features = mlModel['features']
+    labels = mlModel['labels']
+
+    uniqueLabels = {}
+    colors = ['k', 'y', 'c', 'm', 'g', 'r', 'b']
+    for label in labels:
+        if label not in uniqueLabels:
+            uniqueLabels[label] = colors.pop()
+
+    
+    for feat1, feat2, label in zip(features[:, feature1], features[:, feature2], labels):
+        plt.scatter(feat1, feat2, c=uniqueLabels[label])
+
+    # Create a legend mapping color of the marker to the label of the data
+    patches = []
+    for label in uniqueLabels:
+        patches.append(mpatches.Patch(color=uniqueLabels[label], label=str(label)))
+    
+    plt.legend(handles=patches)
+
+
+    plt.title('Feature ' + str(feature1) + ' VS ' + 'Feature ' + str(feature2))
+    plt.xlabel('feature ' + str(feature1))
+    plt.ylabel('feature ' + str(feature2))
+    plt.show()
+
+
 def plotPrediction(mlModel):
     
     features = mlModel['features']
