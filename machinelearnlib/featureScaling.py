@@ -36,8 +36,17 @@ def stdNormalization(mlModel):
     mlModel['std'] = np.asarray(stds)
 
 
+def randomShuffle(mlModel):
+    """
+    Randomly shuffles all rows of the training and testing data.
+    """
 
+    # Shuffle training data
+    shuffledIndex = np.random.permutation(len(mlModel['labels']))
+    mlModel['features'] = mlModel['features'][shuffledIndex]
+    mlModel['labels'] = mlModel['labels'][shuffledIndex]
 
-
-
-
+    # Shuffle testing data
+    shuffledIndex = np.random.permutation(len(mlModel['labels']))
+    mlModel['features'] = mlModel['features'][shuffledIndex]
+    mlModel['labels'] = mlModel['labels'][shuffledIndex]
