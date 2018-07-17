@@ -1,1 +1,0 @@
-An implementation of common machine learning algorithms
