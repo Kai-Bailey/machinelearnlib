@@ -64,8 +64,8 @@ ml.run(mlModel)
 Training data must formatted so that each column contains a feature and the last column is the label. 
 Each row is a training example.
 
-| feature1 | feature2 | feature3 | label1 |   |
-|----------|----------|----------|--------|---|
+| feature1 | feature2 | feature3 | label1 |
+|----------|----------|----------|--------|
 | datapoint1 | datapoint1 | datapoint1 | datapoint1 | 
 | datapoint2 | datapoint2 | datapoint2 | datapoint2 | 
 
