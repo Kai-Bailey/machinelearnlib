@@ -13,4 +13,17 @@ def initializeWeights(mlModel):
 
     return mlModel
 
-    # TODO neural net initialization
+def neuralNetInitializeWeights(mlModel):
+    """
+    Initialize weights of the neural network based on the netArchitechture and the randInitRange.
+    """
+
+    randInitRange = mlModel.randInitRange
+    netArchitecture = mlModel.netArchitechture
+    weights = []
+    
+    for i in range(len(netArchitecture)-1):
+        weight = np.random.rand(netArchitecture[i+1], netArchitecture[i]+1) * 2 * randInitRange - randInitRange       
+        weights.append(weight)
+
+    mlModel.weights = weights
