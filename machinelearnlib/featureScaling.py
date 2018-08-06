@@ -31,7 +31,7 @@ def stdNormalization(mlModel):
     :return mlModel: Class defining the users options for the ml model.  
     """
 
-    features = mlModelfeatures
+    features = mlModel.features
     numFeatures = features.shape[1]
 
     stds = []

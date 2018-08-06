@@ -21,17 +21,6 @@ def run(mlModel):
     while processList.ready():
         args = processList.consume(args)
 
-
-    # print_title()
-    # loadData.loadIrisData(mlModel)
-    # featureScaling.randomShuffle(mlModel)
-    # plots.plotTrainDataLinearRegression(mlModel, 0, 1)
-    # initializeWeights.initializeWeights(mlModel)
-
-    # #featureScaling.meanNormalization(mlModel)
-    # #featureScaling.stdNormalization(mlModel)
-    # train.gradientDescent(mlModel)
-    # plots.plotCost(mlModel)
  
 class Model():
 
