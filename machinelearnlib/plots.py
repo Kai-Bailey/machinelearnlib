@@ -92,3 +92,14 @@ def plotCost(mlModel):
     plt.show()
 
     return mlModel
+
+def plotMNIST(feature):
+    """
+    Given a number from the MNIST dataset this will plot an image of the number.
+
+    :param feature: 784 numpy vector represent a number from the mnist training set.
+    """
+
+    plt.subplot(111)
+    plt.imshow(feature, cmap=plt.get_cmap('gray'))
+    plt.show()
