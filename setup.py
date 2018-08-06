@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from os import path
 
 setup(name='machinelearnlib',
-      version='0.1.2',
+      version='0.2.0',
       description='Implementation of common machine learning algorithms',
       url='https://github.com/Kai-Bailey/machinelearnlib',
       author='Kai Bailey',
@@ -10,5 +10,4 @@ setup(name='machinelearnlib',
       license='MIT',
       keywords='machine learning data science',
       packages=find_packages(exclude=['contrib', 'docs', 'tests']),
-      install_requires=['numpy', 'matplotlib'],
-      entry_points={'console_scripts':['ml=machinelearnlib.machinelearnlib:main']})
+      install_requires=['numpy', 'matplotlib'],)

@@ -4,9 +4,12 @@ def meanNormalization(mlModel):
     """
     Subtract the mean from each feature from that feature so the data
     is centered around 0.
+
+    :param mlModel: Class defining the users options for the ml model.
+    :return mlModel: Class defining the users options for the ml model. 
     """
 
-    features = mlModel['features']
+    features = mlModel.features
     numFeatures = features.shape[1]
 
     means = []
@@ -16,14 +19,19 @@ def meanNormalization(mlModel):
         means.append(mean)
 
     # Save to do predictions on real data later
-    mlModel['mean'] = np.asarray(means) 
+    mlModel.mean = np.asarray(means) 
+
+    return mlModel
 
 def stdNormalization(mlModel):
     """
-    Divide each feature by the standard deviation for that feature. 
+    Divide each feature by the standard deviation for that feature.
+
+    :param mlModel: Class defining the users options for the ml model.
+    :return mlModel: Class defining the users options for the ml model.  
     """
 
-    features = mlModel['features']
+    features = mlModelfeatures
     numFeatures = features.shape[1]
 
     stds = []
@@ -33,20 +41,26 @@ def stdNormalization(mlModel):
         stds.append(std)
 
     # Save std to do predictions on real data later
-    mlModel['std'] = np.asarray(stds)
+    mlModel.std = np.asarray(stds)
 
+    return mlModel
 
 def randomShuffle(mlModel):
     """
     Randomly shuffles all rows of the training and testing data.
+
+    :param mlModel: Class defining the users options for the ml model.
+    :return mlModel: Class defining the users options for the ml model. 
     """
 
     # Shuffle training data
-    shuffledIndex = np.random.permutation(len(mlModel['labels']))
-    mlModel['features'] = mlModel['features'][shuffledIndex]
-    mlModel['labels'] = mlModel['labels'][shuffledIndex]
+    shuffledIndex = np.random.permutation(len(mlModel.labels))
+    mlModel.features = mlModel.features[shuffledIndex]
+    mlModel.labels = mlModel.labels[shuffledIndex]
 
     # Shuffle testing data
-    shuffledIndex = np.random.permutation(len(mlModel['labels']))
-    mlModel['features'] = mlModel['features'][shuffledIndex]
-    mlModel['labels'] = mlModel['labels'][shuffledIndex]
+    shuffledIndex = np.random.permutation(len(mlModel.labels))
+    mlModel.features = mlModel.features[shuffledIndex]
+    mlModel.labels = mlModel.labels[shuffledIndex]
+
+    return mlModel

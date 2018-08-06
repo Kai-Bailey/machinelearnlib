@@ -1,16 +1,16 @@
 import numpy as np
+import loadModel
 
 def cost(features, labels, weights, reg=0):
     """
     Computes the squared error between the labels and predicted output with regularization for each weight.
 
-    Param: features - Numpy matrix of input data used to make prediction.
-                      Each row is a training example and each feature is a column.
-           labels - Numpy array of the correct output for each training example.
-           weights - Numpy array of the learned weights of the model.
-           reg - Integer representing the regularization.
+    :param features: Numpy matrix of input data used to make prediction. Each row is a training example and each feature is a column.
+    :param labels: Numpy array of the correct output for each training example.
+    :param weights: Numpy array of the learned weights of the model.
+    :param reg: Integer representing the regularization.
 
-    Return: Cost of the linear regression model.
+    :return: Cost of the linear regression model.
     """
 
     # Number of training set examples
@@ -51,12 +51,11 @@ def gradient(features , labels, weights, reg=0):
     """
     Computes the gradient of the cost function For linear regression. 
 
-    Param: features - Numpy matrix of input data used to make prediction.
-                      Each row is a training example and each feature is a column.
-    labels - Numpy array of the correct output for each training example.
-    weights - Numpy array of the learned weights of the model.
+    :param features: Numpy matrix of input data used to make prediction. Each row is a training example and each feature is a column.
+    :param labels: Numpy array of the correct output for each training example.
+    :param weights: Numpy array of the learned weights of the model.
 
-    Return: A numpy array containing the partial derivative of the cost function for each weight.
+    :return: A numpy array containing the partial derivative of the cost function for each weight.
     """
     
     numEx = features.shape[0]
@@ -74,10 +73,20 @@ def gradient(features , labels, weights, reg=0):
     # Add the gradient of the regualrization term except for bias
     grad[1:] = grad[1:] + (reg/numEx)*weights[1:]
 
+    
     return grad
 
-
 def load(mlModel):
-    mlModel["cost"] = cost
-    mlModel["gradient"] = gradient
-    mlModel["predict"] = predict
+    """
+    """
+
+    mlModel.cost = cost
+    mlModel.gradient = gradient
+    mlModel.predict = predict
+    loadModel.load("linearRegression")
+
+    # mlModel["cost"] = cost
+    # mlModel["gradient"] = gradient
+    # mlModel["predict"] = predict
+    # mlModel["process_list"] = ["loadData.loadData(mlModel)", "plots.plotTrainDataLinearRegression(mlModel)", "initializeWeights.initializeWeights(mlModel)",
+    #                             "featureScaling.meanNormalization(mlModel)", "featureScaling.stdNormalization(mlModel)", "train.gradientDescent(mlModel)", "plots.plotCost(mlModel)"]

@@ -5,11 +5,11 @@ import numpy as np
 def plotTrainDataLinearRegression(mlModel):
     """
     This function is only recommended for data sets with a small number of features. Data sets with multiple
-    features are difficult to visualize on a 2d plot. This will create a plot of each feature aganst the labels.
+    features are difficult to visualize on a 2d plot. This will create a plot of each feature against the labels.
     """ 
 
-    features = mlModel['features']
-    labels = mlModel['labels']
+    features = mlModel.features
+    labels = mlModel.labels
     numFeatures = features.shape[1]
 
     for i in range(numFeatures):
@@ -19,7 +19,8 @@ def plotTrainDataLinearRegression(mlModel):
         plt.ylabel('labels')
         plt.show()
 
-            
+    return mlModel
+
 def plotTrainDataLogisticRegression(mlModel, feature1, feature2):
     """
     This function is only recommended for data sets with a small number of features. Data sets with multiple
@@ -27,8 +28,8 @@ def plotTrainDataLogisticRegression(mlModel, feature1, feature2):
     markers for each label. Feature1 and feature2 are the column numbers of the features to plot. 
     """
 
-    features = mlModel['features']
-    labels = mlModel['labels']
+    features = mlModel.features
+    labels = mlModel.labels
 
     uniqueLabels = {}
     colors = ['k', 'y', 'c', 'm', 'g', 'r', 'b']
@@ -53,22 +54,22 @@ def plotTrainDataLogisticRegression(mlModel, feature1, feature2):
     plt.ylabel('feature ' + str(feature2))
     plt.show()
 
+    return mlModel
 
 def plotPrediction(mlModel):
     
-    features = mlModel['features']
-    labels = mlModel['labels']
+    features = mlModel.features
+    labels = mlModel.labels
     numFeatures = features.shape[1]
 
-    if mlModel["model"] == "linearRegression":
+    if mlModel.model == "linearRegression":
         for i in range(numFeatures):
             # Plot training data
             plt.scatter(features[:, i], labels)
 
             # Plot prediction
             featuresUni = np.array(np.arange(100)).reshape(100, 1)
-            import models.linearRegression as linearRegression
-            predictions = linearRegression.predict(featuresUni, mlModel['weights'])
+            predictions = mlModel.predict(featuresUni, mlModel.weights)
             plt.plot(featuresUni, predictions, 'r')
 
 
@@ -77,14 +78,17 @@ def plotPrediction(mlModel):
             plt.ylabel('labels')
             plt.show()   
 
+    return mlModel
 
 def plotCost(mlModel):
     """
     Plots the cost for each iteration. Note that a training algorithm must be run before this plot.
     """
 
-    plt.plot(mlModel['cost'])
+    plt.plot(mlModel.cost)
     plt.title('Cost vs Iterations')
     plt.xlabel('Iterations')
     plt.ylabel('Cost')
     plt.show()
+
+    return mlModel
