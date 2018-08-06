@@ -22,6 +22,7 @@ _models_sequence = {    "linearRegression" : [loadData.loadData,
                           #featureScaling.meanNormalization,
                           #featureScaling.stdNormalization,
                           train.gradientDescent,
+                          plots.plotPrediction,
                           plots.plotCost],
 
                         "logisticRegression" : [loadData.loadIrisData,
