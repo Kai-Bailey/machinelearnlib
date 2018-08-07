@@ -1,5 +1,11 @@
 import numpy as np
 
+class WeightsError(Exception):
+    """
+    Exception wrapper for weight errors
+    """
+    pass
+
 def initializeWeights(mlModel):
     """
     Randomly initalize weights in range [-randInitRange, randInitRange]. If randInitRange is not defined 
@@ -19,11 +25,16 @@ def neuralNetInitializeWeights(mlModel):
     """
 
     randInitRange = mlModel.randInitRange
-    netArchitecture = mlModel.netArchitechture
+    netArchitecture = mlModel.netArchitecture
     weights = []
-    
+
+    if netArchitecture[0] != mlModel.features.shape[1]:
+        raise WeightsError("Number of features does not match the input layer")
+
     for i in range(len(netArchitecture)-1):
         weight = np.random.rand(netArchitecture[i+1], netArchitecture[i]+1) * 2 * randInitRange - randInitRange       
         weights.append(weight)
 
     mlModel.weights = weights
+
+    return mlModel

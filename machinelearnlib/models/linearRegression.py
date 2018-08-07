@@ -78,6 +78,7 @@ def gradient(features , labels, weights, reg=0):
 
 def load(mlModel):
     """
+    Load the linear regression model.
     """
 
     mlModel.cost = cost

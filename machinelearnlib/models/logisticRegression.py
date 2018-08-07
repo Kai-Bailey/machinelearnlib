@@ -1,6 +1,6 @@
 import numpy as np
 import activationFunc
-
+import loadModel
 
 def cost(features, labels, weights, reg=0):
     """
@@ -75,3 +75,12 @@ def gradient(features , labels, weights, reg=0):
 
     return grad
 
+def load(mlModel):
+    """
+    Load the logistic regression model.
+    """
+
+    mlModel.cost = cost
+    mlModel.gradient = gradient
+    mlModel.predict = predict
+    loadModel.load("logisticRegression")

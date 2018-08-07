@@ -99,6 +99,7 @@ def plotMNIST(feature):
 
     :param feature: 784 numpy vector represent a number from the mnist training set.
     """
+    feature = feature.reshape(28, 28)
 
     plt.subplot(111)
     plt.imshow(feature, cmap=plt.get_cmap('gray'))

@@ -38,13 +38,13 @@ class Model():
 def main():
     
     # Can choose from linearRegression, logisticRegression and neuralNet
-    model = "linearRegression"
+    model = "neuralNet"
     
     # Training data
     # The files containing the training data should be placed in the data folder and the 
     # names of the files should be specified below. Features are are arranged so each row is a
     # training example and each feature is a column. Labels should be the last column.
-    trainDataFileName = "linearTrain.csv"
+    trainDataFileName = None
     testDataFileName = None #"linearTest.csv"
 
     # Format of the training data
@@ -52,7 +52,7 @@ def main():
     fileFormat = "csv"
 
     # Hyperparameters
-    learningRate = 0.0001
+    learningRate = 0.001
     regularization = 0.1
     randInitRange = 0.1
     
@@ -63,7 +63,7 @@ def main():
     # For example a neural network with an input layer of size 10, hidden layer 12 and output layer of 8
     # would use [10, 12, 8]. The input layer must be the same size as the number of features (columns) in
     # the training data. If you are not using a neural net the list can be left empty.
-    netArchitechture = []
+    netArchitechture = [784, 100, 10]
 
     mlModel = Model(model, 
                     trainDataFileName, 

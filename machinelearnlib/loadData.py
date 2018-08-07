@@ -1,26 +1,7 @@
 import numpy as np
 from numpy import genfromtxt
 import matplotlib.pyplot as plt
-
-def loadDataMNIST(mlModel):
-    """
-    Load the MNIST data set.
-    """
-    import mnist
-
-    train_images = mnist.train_images()
-    train_labels = mnist.train_labels()
-
-    test_images = mnist.test_images()
-    test_labels = mnist.test_labels()
-
-    mlModel.features = train_images.reshape((train_images.shape[0], train_images.shape[1] * train_images.shape[2]))
-    mlModel.labels = train_labels
-
-    mlModel.trainFeatures = test_images.reshape((test_images.shape[0], test_images.shape[1] * test_images.shape[2]))
-    mlModel.trainLabels = test_labels
-
-    return mlModel
+import pandas as pd
 
 def loadData(mlModel):
     """
@@ -41,6 +22,26 @@ def loadData(mlModel):
         testData = pd.read_csv(testFileName)
         mlModel.testFeatures = np.array(testData.iloc[:,:-1])
         mlModel.testLabels = np.array(testData.iloc[:,-1])
+
+    return mlModel
+
+def loadDataMNIST(mlModel):
+    """
+    Load the MNIST data set.
+    """
+    import mnist
+
+    train_images = mnist.train_images()
+    train_labels = mnist.train_labels()
+
+    test_images = mnist.test_images()
+    test_labels = mnist.test_labels()
+
+    mlModel.features = train_images.reshape((train_images.shape[0], train_images.shape[1] * train_images.shape[2]))
+    mlModel.labels = train_labels
+
+    mlModel.trainFeatures = test_images.reshape((test_images.shape[0], test_images.shape[1] * test_images.shape[2]))
+    mlModel.trainLabels = test_labels
 
     return mlModel
 

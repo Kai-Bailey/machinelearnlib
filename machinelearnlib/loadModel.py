@@ -10,7 +10,7 @@ import train
 
 class ModelError(Exception):
     """
-    Exception wrapper for Plugin errors
+    Exception wrapper for Model errors
     """
     pass
 
@@ -32,7 +32,15 @@ _models_sequence = {    "linearRegression" : [loadData.loadData,
                           featureScaling.meanNormalization,
                           featureScaling.stdNormalization,
                           train.gradientDescent,
-                          plots.plotCost],  
+                          plots.plotCost],
+
+                        "neuralNet" : [loadData.loadDataMNIST,
+                          featureScaling.randomShuffle,
+                          initializeWeights.neuralNetInitializeWeights,
+                          #featureScaling.meanNormalization,
+                          #featureScaling.stdNormalization,
+                          train.backPropogation,
+                          plots.plotCost]
                           }
 
 
