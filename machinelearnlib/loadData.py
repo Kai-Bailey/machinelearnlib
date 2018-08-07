@@ -38,10 +38,18 @@ def loadDataMNIST(mlModel):
     test_labels = mnist.test_labels()
 
     mlModel.features = train_images.reshape((train_images.shape[0], train_images.shape[1] * train_images.shape[2]))
-    mlModel.labels = train_labels
+    
+    # Convert labels to one hot
+    onehot_train_labels = np.zeros((train_labels.size, 10))
+    onehot_train_labels[np.arange(train_labels.size), train_labels] = 1
+    mlModel.labels = onehot_train_labels
 
-    mlModel.trainFeatures = test_images.reshape((test_images.shape[0], test_images.shape[1] * test_images.shape[2]))
-    mlModel.trainLabels = test_labels
+    mlModel.testFeatures = test_images.reshape((test_images.shape[0], test_images.shape[1] * test_images.shape[2]))
+
+    # Convert labels to one hot
+    onehot_test_labels = np.zeros((test_labels.size, 10))
+    onehot_test_labels[np.arange(test_labels.size), test_labels] = 1
+    mlModel.testLabels = onehot_test_labels
 
     return mlModel
 
