@@ -4,7 +4,43 @@ from matplotlib import pyplot as plt
 import loadModel
 import activationFunc
 
-def cost(feature, labels, weights):
+def cost(features, labels, weights, reg):
+    """
+    Compute the cost for the neural network based on the current weights
+
+    :param features: Numpy matrix of input data used to make prediction.
+                      Each row is a training example and each feature is a column.
+    :param weights: Numpy array of the learned weights of the model.
+    :param labels: Numpy matrix of one hot vectors 
+    :param reg: Integer regularization hyperparameter
+
+    :returns: An int which is the cost of the neural net
+    """
+
+    cost = 0    
+    numEx = features.shape[0]
+
+    hyp = forwardPropagation(features, weights)[-1]
+
+    # Compute cost without regularization
+    cost = (-labels * np.log(hyp)) - ((1-labels) * np.log(1-hyp))
+    cost = np.sum(np.sum(cost, axis=1))
+    cost = cost * (1/numEx)
+
+    # Compute regularization cost
+    # Note this implementation does not regularize the bias units
+    reg_cost = 0
+    for weight in weights:
+        test = np.sum(np.square(weight[:,1:]))
+        print("reg ",test)
+        reg_cost += test
+
+    reg_cost = (reg / (2*numEx)) * reg_cost
+
+    return cost + reg_cost
+
+
+def gradient():
     """
     """
     pass
@@ -13,11 +49,11 @@ def forwardPropagation(features, weights):
     """
     Given the input data features and the weights computes the predictions from the neural network.
 
-    Param: features - Numpy matrix of input data used to make prediction.
+    :param features: Numpy matrix of input data used to make prediction.
                       Each row is a training example and each feature is a column.
-           weights - Numpy array of the learned weights of the model.
+    :param weights: Numpy array of the learned weights of the model.
     :returns: A list of numpy arrays containing the activation of the neural network for each layer except for
-              the input layer.
+              the input layer. Each column is a training example and each row is a node in the neural net.
     """
     
     num_ex = features.shape[0]
@@ -58,6 +94,9 @@ def load(mlModel):
     """
     mlModel.predict = predict
     mlModel.forwardPropagation = forwardPropagation
+    mlModel.backPropagation = backPropagation
+    mlModel.gradient = gradient
+    mlModel.cost = cost
 
     loadModel.load("neuralNet")
 
