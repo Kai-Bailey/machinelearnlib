@@ -16,30 +16,22 @@ class ModelError(Exception):
 
 # A dictionary of process sequence for models loaded models
 _models_sequence = {    "linearRegression" : [loadData.loadData,
-                          #featureScaling.randomShuffle,
                           plots.plotTrainDataLinearRegression,
                           initializeWeights.initializeWeights,
-                          #featureScaling.meanNormalization,
-                          #featureScaling.stdNormalization,
                           train.gradientDescent,
                           plots.plotPrediction,
                           plots.plotCost],
 
                         "logisticRegression" : [loadData.loadIrisData,
-                          featureScaling.randomShuffle,
                           plots.plotTrainDataLinearRegression,
                           initializeWeights.initializeWeights,
-                          featureScaling.meanNormalization,
-                          featureScaling.stdNormalization,
                           train.gradientDescent,
                           plots.plotCost],
 
                         "neuralNet" : [loadData.loadDataMNIST,
-                          featureScaling.randomShuffle,
                           initializeWeights.neuralNetInitializeWeights,
-                          #featureScaling.meanNormalization,
-                          #featureScaling.stdNormalization,
-                          train.backPropogation,
+                          train.gradientDescentNeuralNetwork,
+                          train.accuracyNeuralNetwork,
                           plots.plotCost]
                           }
 

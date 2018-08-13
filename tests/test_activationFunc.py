@@ -17,6 +17,10 @@ class TestActivationFunc(unittest.TestCase):
         result  = af.sigmoid(np.array([-1, 0, 1]))
         np.testing.assert_allclose(result, np.array([0.26894142136999512, 0.5, 0.73105857863]), atol=0.00001)
 
+    def test_sigmoid_gradient(self):
+        result  = af.sigmoid_gradient(np.array([-1, -0.5, 0, 0.5, 1]))
+        np.testing.assert_allclose(result, np.array([0.196612, 0.235004, 0.25000000, 0.235004, 0.196612]), atol=0.00001)
+
 if __name__ == '__main__':
     unittest.main()
 
