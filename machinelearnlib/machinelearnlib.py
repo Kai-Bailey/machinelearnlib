@@ -8,23 +8,13 @@ title = """
 /_/_/_/\_,_/\__/_//_/_/_//_/\__/_/\__/\_,_/_/ /_//_/_/_/_.__/
 
 """
-
-# TODO Ensure everything is type float
-# TODO Reshape feature
-
-def run(mlModel):
-
-    print(title)
-    processList.append(loadModel.load_models)
-
-    args = processList.consume(mlModel)
-    while processList.ready():
-        args = processList.consume(args)
-
  
 class Model():
+    """
+    User defined class specifing the model and its options.
+    """
 
-    def __init__(self, model, trainDataFileName, dataFormat, testDataFileName=None, netArchitecture=None, learningRate=0.0001, regularization=0.1, iterations=10, randInitRange=0.1):
+    def __init__(self, model, trainDataFileName, dataFormat, testDataFileName=None, netArchitecture=None, learningRate=0.0001, regularization=1, iterations=10, randInitRange=0.1):
         self.model = model
         self.trainDataFileName = trainDataFileName
         self.testDataFileName = testDataFileName
@@ -34,6 +24,17 @@ class Model():
         self.iterations = iterations
         self.randInitRange = randInitRange
 
+def train(mlModel):
+    """
+    Cycle through process list defined in loadModel until process list is empty.
+    """
+
+    print(title)
+    processList.append(loadModel.load_models)
+
+    args = processList.consume(mlModel)
+    while processList.ready():
+        args = processList.consume(args)
 
 def main():
     
@@ -52,12 +53,12 @@ def main():
     fileFormat = "csv"
 
     # Hyperparameters
-    learningRate = 0.001
-    regularization = 0.1
+    learningRate = 0.3
+    regularization = 0.0001
     randInitRange = 0.1
     
     # Number of iterations to run the learning algorithm for
-    iterations = 10
+    iterations = 3
 
     # If the model used is a neural net you can specify the number of nodes in each layer using a list.
     # For example a neural network with an input layer of size 10, hidden layer 12 and output layer of 8
@@ -74,14 +75,7 @@ def main():
                     iterations=iterations,
                     randInitRange=randInitRange)
 
-    run(mlModel)
-
-# TODO Feature Scaling options
-# TODO Stochastic vs Gradient 
-# TODO Randomly Shuffle Data
-# TODO Split training set into test, cv and train (% split?)
-# TODO Add more data formats
-
+    train(mlModel)
 
 
 if __name__ == "__main__":

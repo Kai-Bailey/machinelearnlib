@@ -4,9 +4,6 @@ def meanNormalization(mlModel):
     """
     Subtract the mean from each feature from that feature so the data
     is centered around 0.
-
-    :param mlModel: Class defining the users options for the ml model.
-    :return mlModel: Class defining the users options for the ml model. 
     """
 
     features = mlModel.features
@@ -26,9 +23,6 @@ def meanNormalization(mlModel):
 def stdNormalization(mlModel):
     """
     Divide each feature by the standard deviation for that feature.
-
-    :param mlModel: Class defining the users options for the ml model.
-    :return mlModel: Class defining the users options for the ml model.  
     """
 
     features = mlModel.features
@@ -48,9 +42,6 @@ def stdNormalization(mlModel):
 def randomShuffle(mlModel):
     """
     Randomly shuffles all rows of the training and testing data.
-
-    :param mlModel: Class defining the users options for the ml model.
-    :return mlModel: Class defining the users options for the ml model. 
     """
 
     # Shuffle training data

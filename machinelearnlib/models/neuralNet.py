@@ -1,20 +1,18 @@
 import numpy as np
-import copy
-from matplotlib import pyplot as plt
 import loadModel
 import activationFunc
 
 def cost(features, labels, weights, reg):
     """
-    Compute the cost for the neural network based on the current weights
+    Compute the cost for the neural network based on the current weights.
 
     :param features: Numpy matrix of input data used to make prediction.
                       Each row is a training example and each feature is a column.
     :param weights: Numpy array of the learned weights of the model.
-    :param labels: Numpy matrix of one hot vectors 
+    :param labels: Numpy matrix of one hot vectors. Each column is a training example. 
     :param reg: Integer regularization hyperparameter
 
-    :returns: An int which is the cost of the neural net
+    :returns: An int which is the cost of the neural net.
     """
 
     cost = 0    
@@ -34,7 +32,6 @@ def cost(features, labels, weights, reg):
     for weight in weights:
         test = np.sum(np.square(weight[:,1:]))
         reg_cost += test
-
     reg_cost = (reg / (2*numEx)) * reg_cost
 
     return cost + reg_cost
@@ -52,7 +49,7 @@ def forwardPropagation(features, weights):
               example and each row is a node in the neural net.
     """
     
-    # Only one example provided
+    # If only one example is provided
     if features.ndim == 1:
         features = features.reshape(1, features.shape[0])
 
@@ -62,9 +59,9 @@ def forwardPropagation(features, weights):
     activ = np.concatenate((bias_collumn, features), axis=1)
     activ = np.transpose(activ)
 
-    activations = []
-    intermediates = []
-    for weight in weights:
+    activations = []        # After passing through activation function
+    intermediates = []      # Weighted sum of inputs before activation function
+    for weight in weights:  
         inter = np.dot(weight, activ)
         intermediates.append(inter)
         activ = activationFunc.sigmoid(inter)
@@ -79,12 +76,12 @@ def forwardPropagation(features, weights):
 
 def predict(features, weights):
     """
-    Given the input data features and the weight calls forward propogation and returns the value
+    Given the input data features and the weight calls forward propogation and returns the index of value
     the neural network is most confident in.
 
-    Param: features - Numpy matrix of input data used to make prediction.
+    :param features: Numpy matrix of input data used to make prediction.
                       Each row is a training example and each feature is a column.
-           weights - Numpy array of the learned weights of the model.
+    :param weights: Numpy array of the learned weights of the model.
     :returns: The predicted value from the neural network for each training example.
     """
 
@@ -94,13 +91,15 @@ def predict(features, weights):
 
 def backPropagation(features, labels, weights, reg):
     """
-    Compute the gradients of the
+    Computes the gradients of the each weight in the neural network.
 
-    :param features:
-    :param weights:
-    :param labels:
-    :param reg:
-    :returns:
+    :param features: Numpy matrix of input data used to make prediction.
+                      Each row is a training example and each feature is a column.
+    :param weights: Numpy array of the learned weights of the model.
+    :param labels: Numpy matrix of one hot vectors. Each column is a training example. 
+    :param reg: Integer regularization hyperparameter
+    :returns: A list of numpy arrays where each numpy array is the gradient for a set of weights.
+              Matches the shape of mlModel.weights.
     """
     numEx = features.shape[0]
     numFeat = features.shape[1]
@@ -125,16 +124,17 @@ def backPropagation(features, labels, weights, reg):
         # Reverse errors so it nodes mach shape of neural net (left to right)
         errors.reverse()        
 
-        # Calculate gradient for each weight in neural network
-
+        # Add te bias unit
         currFeature = np.hstack((1, features[i,:])).reshape(1, numFeat+1)
 
+        # Calculate gradient for each weight in neural network
         accumGrad[0] += np.dot(errors[0], currFeature)
         for accum, error, activ in zip(accumGrad[1:], errors[1:], activations[:-1]):
             bias_activ = np.vstack((np.array([1]).reshape((1,1)), activ))
             accum += np.dot(error, bias_activ.T)
 
 
+    # Divide by number of examples and add gradient of regularization
     for i, weight in zip(range(len(accumGrad)), weights):
         accumGrad[i] = (1/numEx) * accumGrad[i]
 

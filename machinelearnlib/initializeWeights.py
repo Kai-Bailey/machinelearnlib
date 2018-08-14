@@ -2,7 +2,7 @@ import numpy as np
 
 class WeightsError(Exception):
     """
-    Exception wrapper for weight errors
+    Exception wrapper for weight errors.
     """
     pass
 
@@ -21,7 +21,8 @@ def initializeWeights(mlModel):
 
 def neuralNetInitializeWeights(mlModel):
     """
-    Initialize weights of the neural network based on the netArchitechture and the randInitRange.
+    Initialize weights of the neural network based on the netArchitechture and the randInitRange. If randInitRange
+    is not defined it will default to 0.1.
     """
 
     randInitRange = mlModel.randInitRange
