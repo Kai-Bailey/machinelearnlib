@@ -86,6 +86,10 @@ def plotCost(mlModel):
     """
 
     plt.plot(mlModel.cost)
+
+    if hasattr(mlModel, 'testCost'):
+        plt.plot(mlModel.testCost)
+
     plt.title('Cost vs Iterations')
     plt.xlabel('Iterations')
     plt.ylabel('Cost')
