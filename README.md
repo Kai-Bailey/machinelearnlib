@@ -19,13 +19,13 @@ pip install machinelearnlib
 ```
 
 To use machinelearnlib you must first define the parameters for the model and training data using the model class. The following example will train a neural network on the MNIST data set. Training this model with the following parameters will results in around 94% accuracy on the training and test sets.
-After training the model several examples of hand written digits will be displayed along with models prediction. Finally, a the a graph showing the cost vs iterations will be displayed.
+After training the model several examples of hand written digits will be displayed along with models prediction. Finally, a graph showing the cost vs iterations will be displayed.
 
 <p align="center">
-<img src="images/MNIST4.jpg" width="20%">  <img src="images/MNIST9.jpg" width="20%"> <img src="images/MNIST0.jpg" width="20%"> <img src="images/MNIST2.jpg" width="20%">
+<img src="images/MNIST4.png" width="20%">  <img src="images/MNIST9.png" width="20%"> <img src="images/MNIST0.png" width="20%"> <img src="images/MNIST2.png" width="20%">
 <p/>
 <p align="center">
-<img src="images/CostVSIterations.jpg" width="60%"> 
+<img src="images/CostVSIteration.png" width="60%"> 
 <p/>
 
 ```python
@@ -83,7 +83,7 @@ ml.train(mlModel)
 ## Design Principles
 Machinelearnlib follows two main design principles. 
 
-The first is a central process list which defines the order in which each function will be called. Functions can be dynamically added and removed from this process list during runtime. This allows user defined options such as shuffle data and feature scaling to easily be added during runtime.  
+The first is a central process list which defines the order in which each function will be called. Functions can be dynamically added and removed from this process list during runtime. This allows user defined options such as shuffle data and feature scaling to easily be added.  
 
 The second design principle is a plugin approach to models. Each model is defined by its process list located in loadModel.py and the functions specific to that model defined in its respective script in the models folder. Models are dynamically added during runtime so it easy to add new models without changing any existing code. Furthermore, each model can draw from communal functions located in machinelearnlib folder allowing for code reuse.
 
