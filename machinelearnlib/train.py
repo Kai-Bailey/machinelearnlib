@@ -81,7 +81,6 @@ def accuracyNeuralNetwork(mlModel):
 
     for i in range(10):
         print("Prediction: ", predictions[i])
-        print("Label: ", labels[:,i])
         plots.plotMNIST(features[i,:])
 
     correct = 0

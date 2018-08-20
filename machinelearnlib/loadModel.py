@@ -22,7 +22,7 @@ _models_sequence = {    "linearRegression" : [loadData.loadData,
                           plots.plotPrediction,
                           plots.plotCost],
 
-                        "logisticRegression" : [loadData.loadIrisData,
+                        "logisticRegression" : [loadData.loadData,
                           plots.plotTrainDataLinearRegression,
                           initializeWeights.initializeWeights,
                           train.gradientDescent,

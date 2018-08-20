@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 from os import path
 
 setup(name='machinelearnlib',
-      version='0.2.0',
+      version='0.2.5',
       description='Implementation of common machine learning algorithms',
       url='https://github.com/Kai-Bailey/machinelearnlib',
       author='Kai Bailey',

@@ -14,7 +14,8 @@ class Model():
     User defined class specifing the model and its options.
     """
 
-    def __init__(self, model, trainDataFileName, dataFormat, testDataFileName=None, netArchitecture=None, learningRate=0.0001, regularization=1, iterations=10, randInitRange=0.1):
+    def __init__(self, model, trainDataFileName, dataFormat, testDataFileName=None, netArchitecture=None, 
+                       learningRate=0.0001, regularization=1, iterations=10, randInitRange=0.1, featureScaling=False):
         self.model = model
         self.trainDataFileName = trainDataFileName
         self.testDataFileName = testDataFileName
@@ -23,6 +24,7 @@ class Model():
         self.regularization = regularization
         self.iterations = iterations
         self.randInitRange = randInitRange
+        self.featureScaling = featureScaling
 
 def train(mlModel):
     """
@@ -31,6 +33,8 @@ def train(mlModel):
 
     print(title)
     processList.append(loadModel.load_models)
+    if mlModel.featureScaling:
+        processList.run_after("loadData.loadData")
 
     args = processList.consume(mlModel)
     while processList.ready():
@@ -46,7 +50,7 @@ def main():
     # names of the files should be specified below. Features are are arranged so each row is a
     # training example and each feature is a column. Labels should be the last column.
     trainDataFileName = None
-    testDataFileName = None #"linearTest.csv"
+    testDataFileName = None 
 
     # Format of the training data
     # Valid options are csv or numpy array
@@ -57,8 +61,12 @@ def main():
     regularization = 0.0001
     randInitRange = 0.1
     
+    # Setting featureScaling to True will shuffle the training data, and perform standard deviation 
+    # and mean normalization.
+    featureScaling = False
+
     # Number of iterations to run the learning algorithm for
-    iterations = 3
+    iterations = 250
 
     # If the model used is a neural net you can specify the number of nodes in each layer using a list.
     # For example a neural network with an input layer of size 10, hidden layer 12 and output layer of 8
@@ -73,7 +81,8 @@ def main():
                     learningRate=learningRate, 
                     regularization=regularization, 
                     iterations=iterations,
-                    randInitRange=randInitRange)
+                    randInitRange=randInitRange,
+                    featureScaling = featureScaling)
 
     train(mlModel)
 

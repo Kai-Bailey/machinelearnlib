@@ -8,7 +8,7 @@
 
 ## Description
 
-Machinelearnlib is a python package that allows user to run different machine learning algorithms. It is designed to be a high level library so users can quickly test different models on their data to find which one works the best. The project was motivated by my desire to learn more about data science and machine learning.
+Machinelearnlib is a python package that allows user to run different machine learning algorithms. It is designed to be a high level library so users can quickly test different models on their data to find which one works the best. It also provides various helper functions for importing data, feature scaling and plotting results. The project was motivated by my desire to learn more about data science and machine learning.
 
 ## How to run
 
@@ -18,16 +18,24 @@ Install the library with:
 pip install machinelearnlib
 ```
 
-To use machinelearnlib you must first define the parameters for the model and training data using the model class. The following example will train a neural network on the MNIST() data set. Training this model will the following parameters results in around 90% accuracy on the training and test sets.
+To use machinelearnlib you must first define the parameters for the model and training data using the model class. The following example will train a neural network on the MNIST data set. Training this model with the following parameters will results in around 94% accuracy on the training and test sets.
+After training the model several examples of hand written digits will be displayed along with models prediction. Finally, a the a graph showing the cost vs iterations will be displayed.
+
+<p align="center">
+<img src="images/MNIST4.jpg" width="20%">  <img src="images/MNIST9.jpg" width="20%"> <img src="images/MNIST0.jpg" width="20%"> <img src="images/MNIST2.jpg" width="20%">
+<p/>
+<p align="center">
+<img src="images/CostVSIterations.jpg" width="60%"> 
+<p/>
 
 ```python
 # Can choose from linearRegression, logisticRegression and neuralNet
 model = "neuralNet"
 
 # Training data
-# The files containing the training data should be placed in the data folder and the 
+# The files containing the training data should be placed in a data folder and the 
 # names of the files should be specified below. Features are are arranged so each row is a
-# training example and each feature is a column. Labels should be the last column.
+# training example and each feature is a column. Labels should be stored as a single column.
 trainDataFileName = "MNIST"
 testDataFileName = "MNIST" 
 
@@ -35,13 +43,17 @@ testDataFileName = "MNIST"
 # Valid options are csv, matlab or nparray (numpy array)
 fileFormat = "nparray"
 
+# Setting featureScaling to True will shuffle the training data, and perform standard deviation 
+# and mean normalization.
+featureScaling = False
+
 # Hyperparameters
 learningRate = 0.3
 regularization = 0.0001
 randInitRange = 0.1
 
-# Number of iterations to run the learning algorithm for
-iterations = 100
+# Number of iterations to run the learning algorithm for.
+iterations = 250
 
 # If the model used is a neural net you can specify the number of nodes in each layer using a list.
 # For example a neural network with an input layer of size 10, hidden layer 12 and output layer of 8
@@ -62,7 +74,8 @@ mlModel = Model(model,
                 learningRate=learningRate, 
                 regularization=regularization, 
                 iterations=iterations,
-                randInitRange=randInitRange)
+                randInitRange=randInitRange
+                featureScaling= featureScaling)
 
 train(mlModel)
 ```
@@ -76,8 +89,7 @@ The second design principle is a plugin approach to models. Each model is define
 
 
 ## Data Formatting
-Training data must formatted so that each column contains a feature and the last column is the label. 
-Each row is a training example.
+Training data must formatted so that each column contains a feature and each row is a training example. The test data must be stored as a single column.
 
 |  | feature 1 | feature 2 | feature 3 |
 |----------|----------|----------|--------|
