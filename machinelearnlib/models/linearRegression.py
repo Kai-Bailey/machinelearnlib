@@ -1,5 +1,5 @@
 import numpy as np
-import loadModel
+from .. import loadModel
 
 def cost(features, labels, weights, reg=0):
     """
@@ -85,9 +85,3 @@ def load(mlModel):
     mlModel.gradient = gradient
     mlModel.predict = predict
     loadModel.load("linearRegression")
-
-    # mlModel["cost"] = cost
-    # mlModel["gradient"] = gradient
-    # mlModel["predict"] = predict
-    # mlModel["process_list"] = ["loadData.loadData(mlModel)", "plots.plotTrainDataLinearRegression(mlModel)", "initializeWeights.initializeWeights(mlModel)",
-    #                             "featureScaling.meanNormalization(mlModel)", "featureScaling.stdNormalization(mlModel)", "train.gradientDescent(mlModel)", "plots.plotCost(mlModel)"]

@@ -53,7 +53,7 @@ regularization = 0.0001
 randInitRange = 0.1
 
 # Number of iterations to run the learning algorithm for.
-iterations = 250
+iterations = 3
 
 # If the model used is a neural net you can specify the number of nodes in each layer using a list.
 # For example a neural network with an input layer of size 10, hidden layer 12 and output layer of 8
@@ -65,19 +65,19 @@ netArchitechture = [784, 100, 10]
 Then, simply import the machinelearnlib and run the model:
 
 ```python
-import machinelearnlib as ml
+from machinelearnlib import machinelearnlib as ml
 
-mlModel = Model(model, 
+mlModel = ml.Model(model, 
                 trainDataFileName, 
                 fileFormat, 
                 netArchitecture=netArchitechture,
                 learningRate=learningRate, 
                 regularization=regularization, 
                 iterations=iterations,
-                randInitRange=randInitRange
+                randInitRange=randInitRange,
                 featureScaling= featureScaling)
 
-train(mlModel)
+ml.train(mlModel)
 ```
 
 ## Design Principles

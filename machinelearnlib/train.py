@@ -1,5 +1,5 @@
 import numpy as np
-import plots
+from . import plots
 
 def gradientDescent(mlModel):
     weights = mlModel.weights

@@ -1,5 +1,5 @@
-import loadModel
-import processList
+from . import loadModel
+from . import processList
 
 title = """
                   __   _          __                  ___ __ 

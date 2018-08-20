@@ -1,6 +1,6 @@
 import numpy as np
-import activationFunc
-import loadModel
+from .. import activationFunc
+from .. import loadModel
 
 def cost(features, labels, weights, reg=0):
     """

@@ -1,11 +1,11 @@
 import os
-import processList
-import loadModel
-import loadData
-import featureScaling
-import plots
-import initializeWeights
-import train
+from . import processList
+from . import loadModel
+from . import loadData
+from . import featureScaling
+from . import plots
+from . import initializeWeights
+from . import train
 
 
 class ModelError(Exception):
@@ -54,7 +54,7 @@ def load_models(mlModel):
 
     # Attempt to load model
     try:
-        exec('import models.{}; models.{}.load(mlModel)'.format(model, model))
+        exec('from . import {}; {}.load(mlModel)'.format(model, model))
     except AttributeError:
         raise ModelError('Failed to load ' + model + ': model has no load function')
     except TypeError:
