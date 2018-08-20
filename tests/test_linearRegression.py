@@ -4,12 +4,11 @@ import sys
 import numpy as np
 
 
-# Insert the path to the machinelearnlib folder so python will search those modules on import statements
+# Insert the path to the top level folder so python will search those modules on import statements
 topLevelFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-machinelearnlibFolder = os.path.join(topLevelFolder, 'machinelearnlib')
-sys.path.insert(0, machinelearnlibFolder)
+sys.path.insert(0, topLevelFolder)
 
-import models.linearRegression as linReg
+import machinelearnlib.models.linearRegression as linReg
 
 
 class TestLinearRegression(unittest.TestCase):
